@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col">
+    <div className="min-h-screen bg-gray-100 flex flex-col">
       {/* Hero Section */}
       <section className="flex flex-col md:flex-row items-center justify-between px-8 py-16 max-w-7xl mx-auto">
         <div className="max-w-xl">
@@ -11,7 +11,7 @@ export default function Home() {
             Conecte-se ao WhatsApp de forma simples e acessível
           </h1>
           <p className="text-gray-700 text-lg mb-8">
-            O <strong>jcwppapi</strong> é a solução perfeita para quem precisa
+            O <strong>jcwpp</strong> é a solução perfeita para quem precisa
             integrar o WhatsApp de forma fácil, rápida e econômica. API não
             oficial com suporte 100% brasileiro e em tempo real!
           </p>

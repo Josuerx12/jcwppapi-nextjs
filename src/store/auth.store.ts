@@ -1,0 +1,72 @@
+import { loginFormType } from "@/app/login/schemas/login.schema";
+import { api } from "@/lib/api.config";
+import { User } from "@/types/user.type";
+import { create } from "zustand";
+import Cookies from "js-cookie";
+
+export type States = {
+  token?: string | null;
+  user?: User | null;
+  isPending: boolean;
+};
+
+export type Actions = {
+  login(data: loginFormType): Promise<void>;
+  getUser(): Promise<void>;
+  logout(): void;
+  initAuth(): Promise<void>;
+};
+
+export const useAuthStore = create<States & Actions>((set, get) => ({
+  token: null,
+  user: null,
+  isPending: false,
+
+  async login(data) {
+    set({ isPending: true });
+
+    const response = await api.post<{ access_token: string; user: User }>(
+      "/auth/login",
+      data
+    );
+
+    if (response.data) {
+      const { access_token, user } = response.data;
+
+      // Salva o token no cookie
+      Cookies.set("token", access_token, { expires: 7 }); // Expires in 7 days, ajustável
+
+      // Atualiza o header
+      api.defaults.headers.common.Authorization = access_token;
+
+      set({ user, token: access_token, isPending: false });
+    }
+  },
+
+  async getUser() {
+    set({ isPending: true });
+    try {
+      const response = await api.get<{ data: User }>("/user/user-logged");
+      set({ user: response.data.data, isPending: false });
+    } catch {
+      get().logout(); // Se der erro (ex: 401), faz logout
+    }
+  },
+
+  logout() {
+    Cookies.remove("token");
+    delete api.defaults.headers.common.Authorization;
+    set({ token: null, user: null, isPending: false });
+  },
+
+  async initAuth() {
+    const token = Cookies.get("token");
+
+    if (token) {
+      api.defaults.headers.common.Authorization = token;
+      set({ token });
+
+      await get().getUser();
+    }
+  },
+}));

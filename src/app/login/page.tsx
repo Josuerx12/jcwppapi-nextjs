@@ -15,78 +15,110 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Logo from "@/components/logo";
+import { useAuthStore } from "@/store/auth.store";
+import { useRouter } from "next/navigation";
+import { useMutation } from "@tanstack/react-query";
+import { toast } from "react-toastify";
 
 const LoginPage = () => {
+  const router = useRouter();
+
+  const { user, login } = useAuthStore();
+
+  if (user) {
+    router.push("/dashboard");
+  }
+
   const form = useForm<loginFormType>({
     resolver: zodResolver(loginSchema),
   });
 
-  function handleSubmit(data: loginFormType) {
-    console.log(data);
+  const { isPending, mutateAsync } = useMutation({
+    mutationKey: ["auth-user"],
+    mutationFn: login,
+    onError: (e) => toast.error(e.message),
+    onSuccess() {
+      toast.success("Login realizado com sucesso!");
+    },
+  });
+
+  async function handleSubmit(data: loginFormType) {
+    await mutateAsync(data);
   }
 
   return (
-    <main className=" w-full mt-4">
-      <section className="max-w-xl border p-3 rounded shadow flex flex-col gap-4 mx-auto">
-        <div className="flex flex-col items-center gap-4">
+    <main className="min-h-screen flex  justify-center bg-gray-100 px-4">
+      <section className="w-full h-fit mt-10 max-w-md bg-white p-8 rounded-xl shadow-lg flex flex-col gap-6">
+        <div className="flex flex-col items-center gap-3">
           <Logo />
-          <p className="text-gray-500">
-            Autentique-se para acessar todos os recursos.
+          <h1 className="text-2xl font-bold text-gray-800">
+            Bem-vindo de volta
+          </h1>
+          <p className="text-sm text-gray-500 text-center">
+            Autentique-se para acessar todos os recursos do JCWPPAPI.
           </p>
         </div>
-        <form onSubmit={form.handleSubmit(handleSubmit)}>
-          <Form {...form}>
+
+        <Form {...form}>
+          <form
+            onSubmit={form.handleSubmit(handleSubmit)}
+            className="flex flex-col gap-4"
+          >
             <FormField
               control={form.control}
               name="email"
-              render={({ field }) => {
-                return (
-                  <FormItem>
-                    <FormLabel className="mt-4">Email</FormLabel>
-                    <FormControl>
-                      <Input
-                        className="mt-2"
-                        placeholder="johndoe@email.com"
-                        {...field}
-                        type="email"
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                );
-              }}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Email</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="seu@email.com"
+                      {...field}
+                      type="email"
+                      className="mt-1"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
             />
 
             <FormField
               control={form.control}
               name="password"
-              render={({ field }) => {
-                return (
-                  <FormItem>
-                    <FormLabel className="mt-4">Senha</FormLabel>
-                    <FormControl>
-                      <Input
-                        className="mt-2"
-                        placeholder="*********"
-                        {...field}
-                        type="password"
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                );
-              }}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Senha</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="********"
+                      {...field}
+                      type="password"
+                      className="mt-1"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
             />
 
             <Button
-              className="mt-4 cursor-pointer"
-              title="Fazer login"
+              disabled={isPending}
+              className="w-full mt-2 bg-green-500 hover:bg-green-600 transition-colors duration-300"
               type="submit"
+              title="Fazer login"
             >
               Entrar
             </Button>
-          </Form>
-        </form>
+
+            <p className="text-xs text-gray-400 text-center mt-2">
+              Esqueceu sua senha?{" "}
+              <span className="text-green-500 underline cursor-pointer">
+                Recuperar
+              </span>
+            </p>
+          </form>
+        </Form>
       </section>
     </main>
   );
