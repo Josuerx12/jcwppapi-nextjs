@@ -9,7 +9,7 @@ type Action = {
 };
 
 export const useSidebarMenuStore = create<State & Action>((set, get) => ({
-  isOpen: true,
+  isOpen: false,
   handleOpen: () => {
     set(() => ({ isOpen: !get().isOpen }));
   },
