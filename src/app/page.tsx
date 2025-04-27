@@ -1,3 +1,5 @@
+import RequestSignupBtn from "@/components/buttons/request-signup-btn";
+import StartNowBtn from "@/components/buttons/start-now-btn";
 import { CircleCheckBig, HandCoins, Headset } from "lucide-react";
 import Image from "next/image";
 
@@ -15,12 +17,7 @@ export default function Home() {
             integrar o WhatsApp de forma fácil, rápida e econômica. API não
             oficial com suporte 100% brasileiro e em tempo real!
           </p>
-          <a
-            href="/signup"
-            className="inline-block bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition-all"
-          >
-            Comece Agora
-          </a>
+          <StartNowBtn />
         </div>
         <div className="mt-12 md:mt-0 md:ml-12">
           <Image
@@ -76,12 +73,7 @@ export default function Home() {
         <h2 className="text-3xl font-bold mb-6">
           Pronto para integrar seu sistema ao WhatsApp?
         </h2>
-        <a
-          href="/signup"
-          className="bg-white text-green-500 font-bold py-3 px-6 rounded-lg shadow-lg hover:bg-gray-100 transition-all"
-        >
-          Solicitar Cadastro
-        </a>
+        <RequestSignupBtn />
       </section>
     </div>
   );

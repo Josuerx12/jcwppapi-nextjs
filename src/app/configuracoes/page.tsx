@@ -1,18 +1,17 @@
 "use client";
-
 import { useAuthStore } from "@/store/auth.store";
 import { useRouter } from "next/navigation";
 import React from "react";
 
-const SignUpPage = () => {
+const ConfiguracoesPage = () => {
   const { user } = useAuthStore();
   const router = useRouter();
 
-  if (user) {
-    router.push("/dashboard");
+  if (!user) {
+    router.push("/login");
   }
 
-  return <div>SignUpPage</div>;
+  return <div>ConfiguracoesPage</div>;
 };
 
-export default SignUpPage;
+export default ConfiguracoesPage;

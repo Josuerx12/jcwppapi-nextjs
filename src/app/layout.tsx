@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/navbar";
 import ReactQueryProvider from "@/providers/react-query-provider";
 import ToasterProvider from "@/providers/toaster-provider";
+import SidebarMenu from "@/components/sidebar-menu/sidebar-menu";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,12 +29,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-100`}
       >
         <ReactQueryProvider>
           <ToasterProvider>
             <Navbar />
-            {children}
+            <main className="flex">
+              <SidebarMenu />
+              <div className="flex-1">{children}</div>
+            </main>
           </ToasterProvider>
         </ReactQueryProvider>
       </body>
