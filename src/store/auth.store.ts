@@ -23,30 +23,31 @@ export const useAuthStore = create<States & Actions>((set, get) => ({
   isPending: false,
 
   async login(data) {
-    set({ isPending: true });
+    set(() => ({ isPending: true }));
 
-    const response = await api.post<{ access_token: string; user: User }>(
-      "/auth/login",
-      data
-    );
+    const response = await api.post<{
+      data: { access_token: string; user: User };
+    }>("/auth/login", data);
 
     if (response.data) {
-      const { access_token, user } = response.data;
+      const { access_token, user } = response.data.data;
+
+      console.log(response.data);
 
       // Salva o token no cookie
-      Cookies.set("token", access_token, { expires: 7 }); // Expires in 7 days, ajustável
+      Cookies.set("jcwpp_access_token", access_token); // Expires in 7 days, ajustável
 
       // Atualiza o header
       api.defaults.headers.common.Authorization = access_token;
 
-      set({ user, token: access_token, isPending: false });
+      set(() => ({ user, token: access_token, isPending: false }));
     }
   },
 
   async getUser() {
     set({ isPending: true });
     try {
-      const response = await api.get<{ data: User }>("/user/user-logged");
+      const response = await api.get<{ data: User }>("/users/user-logged");
       set({ user: response.data.data, isPending: false });
     } catch {
       get().logout(); // Se der erro (ex: 401), faz logout
@@ -54,13 +55,13 @@ export const useAuthStore = create<States & Actions>((set, get) => ({
   },
 
   logout() {
-    Cookies.remove("token");
+    Cookies.remove("jcwpp_access_token");
     delete api.defaults.headers.common.Authorization;
     set({ token: null, user: null, isPending: false });
   },
 
   async initAuth() {
-    const token = Cookies.get("token");
+    const token = Cookies.get("jcwpp_access_token");
 
     if (token) {
       api.defaults.headers.common.Authorization = token;

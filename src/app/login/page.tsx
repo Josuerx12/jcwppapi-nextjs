@@ -36,9 +36,10 @@ const LoginPage = () => {
   const { isPending, mutateAsync } = useMutation({
     mutationKey: ["auth-user"],
     mutationFn: login,
-    onError: (e) => toast.error(e.message),
+    onError: (e: Error) => toast.error(e.message),
     onSuccess() {
       toast.success("Login realizado com sucesso!");
+      router.push("/dashboard");
     },
   });
 
