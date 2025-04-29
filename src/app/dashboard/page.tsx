@@ -10,7 +10,15 @@ const DashboardPage = () => {
   if (!user) {
     router.push("/login");
   }
-  return <div>DashboardPage</div>;
+  return (
+    <div>
+      <h1 className="text-2xl font-semibold mb-4">Minhas Instâncias</h1>
+      <p>
+        Aqui você pode ver e gerenciar suas instâncias do WhatsApp conectadas à
+        API JCWPP.
+      </p>
+    </div>
+  );
 };
 
 export default DashboardPage;

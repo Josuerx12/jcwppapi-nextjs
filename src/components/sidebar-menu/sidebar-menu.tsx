@@ -2,7 +2,7 @@
 
 import { useAuthStore } from "@/store/auth.store";
 import { useSidebarMenuStore } from "@/store/sidebar-menu.store";
-import { Home, LayoutDashboard, Settings, X } from "lucide-react";
+import { BookText, Home, LayoutDashboard, Settings, X } from "lucide-react";
 import Link from "next/link";
 import clsx from "clsx";
 import { usePathname } from "next/navigation";
@@ -72,11 +72,23 @@ const SidebarMenu = () => {
             className={clsx(
               "flex rounded-md transition-all duration-200 items-center gap-2 p-2",
               {
-                "bg-gray-900 text-white": pathname === "/dashboard",
+                "bg-gray-900 text-white": pathname.includes("dashboard"),
               }
             )}
           >
             <LayoutDashboard /> Dashboard
+          </Link>
+          <Link
+            onClick={handleLinkClick}
+            href="/docs"
+            className={clsx(
+              "flex rounded-md transition-all duration-200 items-center gap-2 p-2",
+              {
+                "bg-gray-900 text-white": pathname.includes("docs"),
+              }
+            )}
+          >
+            <BookText /> Documentação
           </Link>
           <Link
             onClick={handleLinkClick}

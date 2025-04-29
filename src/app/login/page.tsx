@@ -8,7 +8,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { loginFormType, loginSchema } from "./schemas/login.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -25,9 +25,11 @@ const LoginPage = () => {
 
   const { user, login } = useAuthStore();
 
-  if (user) {
-    router.push("/dashboard");
-  }
+  useEffect(() => {
+    if (user) {
+      router.push("/dashboard");
+    }
+  }, [user]);
 
   const form = useForm<loginFormType>({
     resolver: zodResolver(loginSchema),
@@ -56,7 +58,7 @@ const LoginPage = () => {
             Bem-vindo de volta
           </h1>
           <p className="text-sm text-gray-500 text-center">
-            Autentique-se para acessar todos os recursos do JCWPPAPI.
+            Autentique-se para acessar todos os recursos do JCWPP.
           </p>
         </div>
 
