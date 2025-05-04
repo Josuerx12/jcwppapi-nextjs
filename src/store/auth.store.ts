@@ -38,7 +38,7 @@ export const useAuthStore = create<States & Actions>((set, get) => ({
       Cookies.set("jcwpp_access_token", access_token); // Expires in 7 days, ajustável
 
       // Atualiza o header
-      api.defaults.headers.common.Authorization = access_token;
+      api.defaults.headers.common.Authorization = `Bearer ${access_token}`;
 
       set(() => ({ user, token: access_token, isPending: false }));
     }
@@ -64,7 +64,7 @@ export const useAuthStore = create<States & Actions>((set, get) => ({
     const token = Cookies.get("jcwpp_access_token");
 
     if (token) {
-      api.defaults.headers.common.Authorization = token;
+      api.defaults.headers.common.Authorization = `Bearer ${token}`;
       set({ token });
 
       await get().getUser();

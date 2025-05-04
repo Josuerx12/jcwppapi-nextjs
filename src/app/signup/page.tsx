@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import { SignUpSchema, SignUpType } from "./schemas/signup.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
-import { SignUp } from "@/actions/signup.action";
+import { SignUp } from "@/services/signup.action";
 import { toast } from "react-toastify";
 import Logo from "@/components/logo";
 import {
