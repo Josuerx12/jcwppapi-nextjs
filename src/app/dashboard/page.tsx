@@ -11,23 +11,23 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const DashboardPage = () => {
-  const { user } = useAuthStore();
+  const { user, isPending: isLoading } = useAuthStore();
   const [isAdding, setIsAdding] = useState(false);
 
   const router = useRouter();
 
   useEffect(() => {
-    if (!user) {
+    if (!user && !isLoading) {
       router.push("/login");
     }
-  }, [user, router]);
+  }, [user, router, isLoading]);
 
   const { data, isPending } = useQuery({
     queryKey: ["instances"],
     queryFn: InstanceService.getAll,
   });
 
-  if (isPending) {
+  if (isPending || isLoading) {
     return <InstanceLoadingSkeleton />;
   }
 

@@ -20,11 +20,9 @@ export type Actions = {
 export const useAuthStore = create<States & Actions>((set, get) => ({
   token: null,
   user: null,
-  isPending: false,
+  isPending: true,
 
   async login(data) {
-    set(() => ({ isPending: true }));
-
     const response = await api.post<{
       data: { access_token: string; user: User };
     }>("/auth/login", data);
@@ -45,7 +43,6 @@ export const useAuthStore = create<States & Actions>((set, get) => ({
   },
 
   async getUser() {
-    set({ isPending: true });
     try {
       const response = await api.get<{ data: User }>("/users/user-logged");
       set({ user: response.data.data, isPending: false });
@@ -68,6 +65,9 @@ export const useAuthStore = create<States & Actions>((set, get) => ({
       set({ token });
 
       await get().getUser();
+      return;
     }
+
+    set({ isPending: false });
   },
 }));

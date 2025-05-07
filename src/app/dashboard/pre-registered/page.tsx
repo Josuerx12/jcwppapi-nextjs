@@ -9,14 +9,16 @@ import PreRegistersSkeleton from "@/components/loading/PreRegisterSkeleton";
 import PreRegisterCard from "@/components/cards/PreRegisterCard";
 
 const DashboardPreRegisteredUsersPage = () => {
-  const { user } = useAuthStore();
+  const { user, isPending: isLoading } = useAuthStore();
   const router = useRouter();
 
   useEffect(() => {
-    if (!user || user.role === UserRoles.USER) {
+    if (!user && !isLoading) {
+      router.push("/");
+    } else if (user?.role === UserRoles.USER) {
       router.push("/");
     }
-  }, [user, router]);
+  }, [user, router, isLoading]);
 
   const { isPending, data } = useQuery({
     queryKey: ["pre-registers"],
