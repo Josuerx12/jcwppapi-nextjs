@@ -28,11 +28,6 @@ const ProfileTab = ({ user }: { user: User }) => {
           disabled={!isEditing}
         />
         <Input
-          {...register("phone")}
-          placeholder="Telefone"
-          disabled={!isEditing}
-        />
-        <Input
           {...register("document")}
           placeholder="Documento"
           disabled={!isEditing}
