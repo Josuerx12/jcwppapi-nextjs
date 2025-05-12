@@ -2,7 +2,7 @@
 
 import InstanceCard from "@/components/cards/InstanceCard";
 import CreateInstanceModal from "@/components/dialogs/CreateInstanceModal";
-import InstanceLoadingSkeleton from "@/components/loading/InstanceLoadingSkeleton";
+import InstanceListSkeleton from "@/components/loading/InstanceListSkeleton";
 import { Button } from "@/components/ui/button";
 import { InstanceService } from "@/services/InstanceService";
 import { useAuthStore } from "@/store/auth.store";
@@ -28,7 +28,7 @@ const DashboardPage = () => {
   });
 
   if (isPending || isLoading) {
-    return <InstanceLoadingSkeleton />;
+    return <InstanceListSkeleton />;
   }
 
   return (
@@ -38,6 +38,7 @@ const DashboardPage = () => {
         handleOpen={() => setIsAdding((prev) => !prev)}
       />
       <h1 className="text-2xl font-semibold mb-4">Minhas Instâncias</h1>
+      <p className="mb-6">Aqui estão listadas as suas instancias criadas.</p>
       <div className="w-full flex justify-end">
         <Button
           className="cursor-pointer"

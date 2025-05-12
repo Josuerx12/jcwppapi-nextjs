@@ -5,8 +5,8 @@ import { UserRoles } from "@/types/user.type";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
-import PreRegistersSkeleton from "@/components/loading/PreRegisterSkeleton";
 import PreRegisterCard from "@/components/cards/PreRegisterCard";
+import PreRegisterListSkeleton from "@/components/loading/PreRegisterListSkeleton";
 
 const DashboardPreRegisteredUsersPage = () => {
   const { user, isPending: isLoading } = useAuthStore();
@@ -26,7 +26,7 @@ const DashboardPreRegisteredUsersPage = () => {
   });
 
   return (
-    <div className=" px-4 py-6">
+    <div>
       <h1 className="text-2xl font-semibold mb-4">Usuários pré-cadastrados</h1>
       <p className="mb-6">
         Aqui estão listados os usuários cadastrados previamente para acesso à
@@ -34,9 +34,9 @@ const DashboardPreRegisteredUsersPage = () => {
       </p>
 
       {isPending ? (
-        <PreRegistersSkeleton />
+        <PreRegisterListSkeleton />
       ) : (
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-6">
           {data?.map((pre) => (
             <PreRegisterCard key={pre.preRegisterId} preRegister={pre} />
           ))}

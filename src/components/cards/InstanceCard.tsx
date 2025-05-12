@@ -12,6 +12,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { InstanceService } from "@/services/InstanceService";
 import { Loader2, Trash, CheckCircle, AlertTriangle } from "lucide-react";
 import { toast } from "react-toastify";
+import InstanceSkeleton from "../loading/InstanceSkeleton";
 
 const InstanceCard = ({ instance }: { instance: Instance }) => {
   const queryClient = useQueryClient();
@@ -39,12 +40,7 @@ const InstanceCard = ({ instance }: { instance: Instance }) => {
   });
 
   if (isPending) {
-    return (
-      <div className="p-4 text-sm text-muted-foreground flex items-center gap-2">
-        Carregando dados da instância...
-        <Loader2 className="animate-spin" size={16} />
-      </div>
-    );
+    return <InstanceSkeleton />;
   }
 
   const isConnected = !data?.qrCode;

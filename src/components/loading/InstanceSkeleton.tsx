@@ -1,7 +1,7 @@
 import React from "react";
 import { Skeleton } from "../ui/skeleton";
 
-const InstanceLoadingSkeleton = () => {
+const InstanceSkeleton = () => {
   return (
     <div className="w-full">
       <h2>
@@ -24,4 +24,4 @@ const InstanceLoadingSkeleton = () => {
   );
 };
 
-export default InstanceLoadingSkeleton;
+export default InstanceSkeleton;

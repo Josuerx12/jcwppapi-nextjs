@@ -1,11 +1,13 @@
 "use client";
 
 import { PreRegisterService } from "@/services/PreRegisterService";
+import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { PreRegister } from "@/types/pre-register.type";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import React from "react";
 import { toast } from "react-toastify";
 import { Button } from "../ui/button";
+import { Loader2 } from "lucide-react";
 
 const PreRegisterCard = ({ preRegister }: { preRegister: PreRegister }) => {
   const queryClient = useQueryClient();
@@ -22,12 +24,28 @@ const PreRegisterCard = ({ preRegister }: { preRegister: PreRegister }) => {
   });
 
   return (
-    <div
-      key={preRegister.preRegisterId}
-      className="p-4 border rounded-lg shadow-sm bg-white flex justify-between items-center"
-    >
-      <div>
-        <p className="text-lg font-medium">{preRegister.name}</p>
+    <Card className="transition-shadow shadow-sm hover:shadow-lg">
+      <CardHeader className="flex flex-row items-start justify-between">
+        <div>
+          <CardTitle className="text-base">{preRegister.name}</CardTitle>
+        </div>
+        <Button
+          className="cursor-pointer"
+          onClick={() => approveUser(preRegister.preRegisterId)}
+          disabled={isApproving}
+        >
+          {isApproving ? (
+            <p className="flex items-center justify-center gap-2">
+              <span>Aprovando cadastro...</span>
+              <Loader2 className="animate-spin" size={16} />
+            </p>
+          ) : (
+            <>Aprovar cadastro</>
+          )}
+        </Button>
+      </CardHeader>
+
+      <CardContent>
         <p className="text-sm text-muted-foreground">{preRegister.email}</p>
         <p className="text-sm text-muted-foreground">
           Documento: {preRegister.document}
@@ -35,14 +53,8 @@ const PreRegisterCard = ({ preRegister }: { preRegister: PreRegister }) => {
         <p className="text-sm text-muted-foreground">
           Telefone: {preRegister.phone}
         </p>
-      </div>
-      <Button
-        onClick={() => approveUser(preRegister.preRegisterId)}
-        disabled={isApproving}
-      >
-        Aprovar cadastro
-      </Button>
-    </div>
+      </CardContent>
+    </Card>
   );
 };
 
