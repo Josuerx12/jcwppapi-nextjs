@@ -9,9 +9,11 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Copy, RefreshCcw } from "lucide-react";
 import { toast } from "react-toastify";
 import ProfileTab from "./tabs/profile.tab";
+import ChangePasswordModal from "@/components/dialogs/ChangePasswordModal";
 
 const ConfiguracoesPage = () => {
   const { user, isPending } = useAuthStore();
+  const [isChangePassword, setIsChangePassword] = useState(false);
   const router = useRouter();
 
   const [secretToken, setSecretToken] = useState("seu-token-secreto-ficticio");
@@ -23,7 +25,7 @@ const ConfiguracoesPage = () => {
   }, [user, isPending]);
 
   function handleChangePassword() {
-    toast.info("Função de troca de senha ainda será implementada.");
+    setIsChangePassword((prev) => !prev);
   }
 
   function handleCopyToken() {
@@ -39,6 +41,11 @@ const ConfiguracoesPage = () => {
 
   return (
     <div className="p-8">
+      <ChangePasswordModal
+        handleClose={handleChangePassword}
+        open={isChangePassword}
+      />
+
       <h1 className="text-3xl font-bold mb-6 text-green-600">
         Configurações da Conta
       </h1>

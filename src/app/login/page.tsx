@@ -19,6 +19,7 @@ import { useAuthStore } from "@/store/auth.store";
 import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-toastify";
+import Link from "next/link";
 
 const LoginPage = () => {
   const router = useRouter();
@@ -116,9 +117,12 @@ const LoginPage = () => {
 
             <p className="text-xs text-gray-400 text-center mt-2">
               Esqueceu sua senha?{" "}
-              <span className="text-green-500 underline cursor-pointer">
+              <Link
+                href={"/esqueci-senha"}
+                className="text-green-500 underline cursor-pointer"
+              >
                 Recuperar
-              </span>
+              </Link>
             </p>
           </form>
         </Form>
