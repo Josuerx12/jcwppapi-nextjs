@@ -5,6 +5,7 @@ import Navbar from "@/components/navbar";
 import ReactQueryProvider from "@/providers/react-query-provider";
 import ToasterProvider from "@/providers/toaster-provider";
 import SidebarMenu from "@/components/sidebar-menu/sidebar-menu";
+import { Suspense } from "react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,7 +37,11 @@ export default function RootLayout({
             <Navbar />
             <main className="flex">
               <SidebarMenu />
-              <div className="flex-1">{children}</div>
+              <div className="flex-1">
+                <Suspense fallback={<div>Carregando...</div>}>
+                  {children}
+                </Suspense>
+              </div>
             </main>
           </ToasterProvider>
         </ReactQueryProvider>
