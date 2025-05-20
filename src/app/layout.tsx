@@ -6,6 +6,7 @@ import ReactQueryProvider from "@/providers/react-query-provider";
 import ToasterProvider from "@/providers/toaster-provider";
 import SidebarMenu from "@/components/sidebar-menu/sidebar-menu";
 import { Suspense } from "react";
+import AuthProvider from "@/providers/AuthProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,21 +29,23 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="pt">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-100`}
       >
         <ReactQueryProvider>
           <ToasterProvider>
-            <Navbar />
-            <main className="flex">
-              <SidebarMenu />
-              <div className="flex-1">
-                <Suspense fallback={<div>Carregando...</div>}>
-                  {children}
-                </Suspense>
-              </div>
-            </main>
+            <AuthProvider>
+              <Navbar />
+              <main className="flex">
+                <SidebarMenu />
+                <div className="flex-1 min-h-screen">
+                  <Suspense fallback={<div>Carregando...</div>}>
+                    {children}
+                  </Suspense>
+                </div>
+              </main>
+            </AuthProvider>
           </ToasterProvider>
         </ReactQueryProvider>
       </body>

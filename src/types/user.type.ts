@@ -9,10 +9,16 @@ export type User = {
   name: string;
   document: string;
   email: string;
-  password: string;
   isTempPass: boolean;
   role: UserRoles;
-  code: string;
+  createdAt: Date;
+  updatedAt: Date;
+};
+
+export type UserSecret = {
+  userSecretId: string;
+  userId: string;
+  secret: string;
   createdAt: Date;
   updatedAt: Date;
 };

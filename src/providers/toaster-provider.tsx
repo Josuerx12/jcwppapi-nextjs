@@ -1,16 +1,9 @@
 "use client";
 
-import { useAuthStore } from "@/store/auth.store";
-import React, { ReactNode, useEffect } from "react";
+import { ReactNode } from "react";
 import { Bounce, ToastContainer } from "react-toastify";
 
 const ToasterProvider = ({ children }: { children: ReactNode }) => {
-  const { initAuth } = useAuthStore();
-
-  useEffect(() => {
-    initAuth();
-  }, [initAuth]);
-
   return (
     <>
       {children}

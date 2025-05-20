@@ -44,6 +44,37 @@ export class InstanceService {
       throw error;
     }
   }
+
+  static async sendMessage(
+    instanceId: string,
+    number: string,
+    message: string,
+    secret: string
+  ) {
+    try {
+      const res = await api.post(
+        `/instance/${instanceId}/send-text`,
+        {
+          number,
+          message,
+        },
+        {
+          headers: {
+            secret: secret,
+          },
+        }
+      );
+      return res.data;
+    } catch (error: any) {
+      if (error.response) {
+        console.log(error.response);
+        throw error.response.data.message;
+      }
+
+      console.log(error);
+      throw error;
+    }
+  }
 }
 
 export type CreateOrConnectInstanceInput = {

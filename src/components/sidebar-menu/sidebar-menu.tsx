@@ -36,7 +36,7 @@ const SidebarMenu = () => {
   return (
     <aside
       className={clsx(
-        "h-screen bg-white shadow-md transition-all duration-300 ease-in-out overflow-hidden",
+        "bg-white shadow-md transition-all duration-300 ease-in-out overflow-hidden",
         "md:relative",
         {
           "fixed inset-0 z-50 w-full": isOpen && window.innerWidth < 768,

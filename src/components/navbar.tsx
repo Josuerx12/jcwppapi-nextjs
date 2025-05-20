@@ -2,7 +2,7 @@
 import React from "react";
 import Logo from "./logo";
 import Link from "next/link";
-import { Home, LogIn, LogOut } from "lucide-react";
+import { BookText, Home, LogIn, LogOut } from "lucide-react";
 import { useAuthStore } from "@/store/auth.store";
 import SidebarBtnToggle from "./sidebar-menu/sidebar-btn-toggle";
 
@@ -32,6 +32,12 @@ const Navbar = () => {
               href={"/"}
             >
               <Home size={16} /> Pagina Inicial
+            </Link>
+            <Link
+              className="md:flex hidden items-center gap-2 duration-100 md:hover:bg-gray-300 p-2"
+              href={"/docs"}
+            >
+              <BookText size={16} /> Docs
             </Link>
             <Link
               className="flex items-center gap-2 duration-100 md:hover:bg-gray-300 p-2"

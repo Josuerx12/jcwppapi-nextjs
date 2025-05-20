@@ -20,6 +20,7 @@ import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import Link from "next/link";
+import { Eye, EyeOff } from "lucide-react";
 
 const LoginPage = () => {
   const router = useRouter();
@@ -49,6 +50,8 @@ const LoginPage = () => {
   async function handleSubmit(data: loginFormType) {
     await mutateAsync(data);
   }
+
+  const [showPassword, setShowPassword] = React.useState(false);
 
   return (
     <main className="min-h-screen flex  justify-center bg-gray-100 px-4">
@@ -94,12 +97,30 @@ const LoginPage = () => {
                 <FormItem>
                   <FormLabel>Senha</FormLabel>
                   <FormControl>
-                    <Input
-                      placeholder="********"
-                      {...field}
-                      type="password"
-                      className="mt-1"
-                    />
+                    <div className="relative flex items-center">
+                      <Input
+                        placeholder="********"
+                        {...field}
+                        type={showPassword ? "text" : "password"}
+                        className="mt-1 pr-10"
+                      />
+                      <button
+                        type="button"
+                        tabIndex={-1}
+                        title="Mostrar/Esconder senha"
+                        className="absolute right-2 cursor-pointer top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-700"
+                        onClick={() => setShowPassword((v) => !v)}
+                        aria-label={
+                          showPassword ? "Esconder senha" : "Mostrar senha"
+                        }
+                      >
+                        {showPassword ? (
+                          <EyeOff className="w-4 h-4" />
+                        ) : (
+                          <Eye className="w-4 h-4" />
+                        )}
+                      </button>
+                    </div>
                   </FormControl>
                   <FormMessage />
                 </FormItem>

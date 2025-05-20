@@ -1,5 +1,5 @@
 import { api } from "@/lib/api.config";
-import { User } from "@/types/user.type";
+import { User, UserSecret } from "@/types/user.type";
 
 export class UserService {
   static async getAll(): Promise<User[]> {
@@ -68,6 +68,68 @@ export class UserService {
       return res.data;
     } catch (error: any) {
       if (error.response) {
+        throw error.response.data.message;
+      }
+
+      console.log(error);
+      throw error;
+    }
+  }
+
+  static async updateUser({
+    userId,
+    name,
+    email,
+    document,
+  }: {
+    userId: string;
+    name: string;
+    email: string;
+    document: string;
+  }) {
+    try {
+      const res = await api.put(`/users/${userId}`, {
+        name,
+        email,
+        document,
+      });
+      return res.data.data;
+    } catch (error: any) {
+      if (error.response) {
+        console.log(error.response);
+        throw error.response.data.message;
+      }
+
+      console.log(error);
+      throw error;
+    }
+  }
+
+  static async getUserSecret(): Promise<UserSecret> {
+    try {
+      const res = await api.get(`/users/user-secret`);
+      return res.data.data;
+    } catch (error: any) {
+      if (error.response) {
+        console.log(error.response);
+        throw error.response.data.message;
+      }
+
+      console.log(error);
+      throw error;
+    }
+  }
+
+  static async renewUserSecret(): Promise<{
+    message: string;
+    data: UserSecret;
+  }> {
+    try {
+      const res = await api.post(`/users/refresh-user-secret`);
+      return res.data;
+    } catch (error: any) {
+      if (error.response) {
+        console.log(error.response);
         throw error.response.data.message;
       }
 
