@@ -10,7 +10,15 @@ import { Button } from "../ui/button";
 import { Instance } from "@/types/instance.type";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { InstanceService } from "@/services/InstanceService";
-import { Loader2, Trash, CheckCircle, AlertTriangle } from "lucide-react";
+import {
+  Loader2,
+  Trash,
+  CheckCircle,
+  AlertTriangle,
+  User2,
+  Globe,
+  Clock,
+} from "lucide-react";
 import { toast } from "react-toastify";
 import InstanceSkeleton from "../loading/InstanceSkeleton";
 
@@ -49,19 +57,21 @@ const InstanceCard = ({ instance }: { instance: Instance }) => {
     <Card className="transition-shadow shadow-md hover:shadow-xl">
       <CardHeader className="flex flex-row items-start justify-between">
         <div>
-          <CardTitle className="text-base">
-            Instância: {instance.instanceId}
+          <CardTitle className="text-base flex items-center gap-2">
+            Instância: <span className="font-mono">{instance.instanceId}</span>
           </CardTitle>
           <CardDescription className="flex items-center gap-2 mt-1 text-sm">
             {isConnected ? (
               <>
                 <CheckCircle className="text-green-600" size={16} />
-                Conectada
+                <span className="font-semibold text-green-700">Conectada</span>
               </>
             ) : (
               <>
                 <AlertTriangle className="text-yellow-500" size={16} />
-                Aguardando conexão
+                <span className="font-semibold text-yellow-700">
+                  Aguardando conexão
+                </span>
               </>
             )}
           </CardDescription>
@@ -82,9 +92,75 @@ const InstanceCard = ({ instance }: { instance: Instance }) => {
 
       <CardContent>
         {isConnected ? (
-          <p className="text-sm text-muted-foreground">
-            Esta instância está ativa e conectada ao WhatsApp.
-          </p>
+          <div className="flex flex-col gap-3">
+            <div className="flex items-center gap-3">
+              {data!.avatarUrl ? (
+                <img
+                  src={data!.avatarUrl}
+                  alt="Avatar"
+                  className="w-12 h-12 rounded-full border"
+                />
+              ) : (
+                <User2 className="w-12 h-12 text-gray-400" />
+              )}
+              <div>
+                <div className="font-semibold text-base">
+                  {data?.profile?.name || "Nome não disponível"}
+                </div>
+                <div className="text-xs text-muted-foreground">
+                  ID: {data?.profile?.id || "N/A"}
+                </div>
+                <div className="text-xs text-muted-foreground">
+                  LID: {data?.profile?.lid || "N/A"}
+                </div>
+              </div>
+            </div>
+            {data?.bussinessProfile && (
+              <div className="mt-2 border-t pt-2">
+                <div className="flex items-center gap-2 text-sm mb-1">
+                  <Globe size={16} className="text-blue-500" />
+                  <span className="font-medium">Perfil Comercial</span>
+                </div>
+                <div className="text-xs text-muted-foreground mb-1">
+                  Categoria: {data?.bussinessProfile.category || "N/A"}
+                </div>
+                {data?.bussinessProfile.website &&
+                  data?.bussinessProfile.website.length > 0 && (
+                    <div className="text-xs text-muted-foreground mb-1">
+                      Website:{" "}
+                      {data?.bussinessProfile.website.map((w, i) => (
+                        <a
+                          key={w}
+                          href={w}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="underline text-blue-600 mr-1"
+                        >
+                          {w}
+                          {i < data.bussinessProfile!.website.length - 1
+                            ? ","
+                            : ""}
+                        </a>
+                      ))}
+                    </div>
+                  )}
+                <div className="text-xs text-muted-foreground mb-1">
+                  Descrição: {data.bussinessProfile.description || "N/A"}
+                </div>
+                {data.bussinessProfile.business_hours && (
+                  <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                    <Clock size={14} className="text-gray-500" />
+                    <span>
+                      Horário: {data.bussinessProfile.business_hours.timezone}
+                    </span>
+                  </div>
+                )}
+              </div>
+            )}
+            <p className="text-xs text-muted-foreground mt-2">
+              Esta instância está ativa e conectada ao WhatsApp.
+            </p>
+          </div>
         ) : (
           <div className="flex flex-col items-center gap-2">
             <p className="text-sm">Escaneie o QR Code abaixo para conectar:</p>

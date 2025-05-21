@@ -81,11 +81,7 @@ export type CreateOrConnectInstanceInput = {
   instanceId?: string;
 };
 
-export type CreateOrConnectInstanceOutput = {
-  instanceId: string;
-  qrCode?: string;
-  message: string;
-};
+export type CreateOrConnectInstanceOutput = Instance;
 
 export type GetAllInstanceOutput = {
   instances: Instance[];
