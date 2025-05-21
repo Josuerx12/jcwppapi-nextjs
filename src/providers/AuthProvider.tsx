@@ -15,7 +15,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
       <div className="flex flex-col items-center justify-center gap-y-6 h-screen">
         <Logo />
 
-        <h3 className="text-2xl font-bold uppercase">
+        <h3 className="text-2xl text-center font-bold uppercase">
           Aguarde carregando dados...
         </h3>
 

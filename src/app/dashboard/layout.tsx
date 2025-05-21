@@ -9,6 +9,7 @@ export default function DashboardLayout({
     <div className="min-h-screen bg-gray-100 p-4">
       <div className="mx-auto bg-white rounded-lg shadow p-4">
         <DashboardTabs />
+
         <div className="mt-4">{children}</div>
       </div>
     </div>

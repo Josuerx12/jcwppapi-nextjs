@@ -34,13 +34,13 @@ const Navbar = () => {
               <Home size={16} /> Pagina Inicial
             </Link>
             <Link
-              className="md:flex hidden items-center gap-2 duration-100 md:hover:bg-gray-300 p-2"
+              className="flex items-center gap-2 duration-100 md:hover:bg-gray-300 sm:p-2"
               href={"/docs"}
             >
               <BookText size={16} /> Docs
             </Link>
             <Link
-              className="flex items-center gap-2 duration-100 md:hover:bg-gray-300 p-2"
+              className="flex items-center gap-2 duration-100 md:hover:bg-gray-300 sm:p-2"
               href={"/login"}
             >
               Entrar <LogIn size={16} />

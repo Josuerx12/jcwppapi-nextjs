@@ -47,7 +47,11 @@ const SendMessageTestForm = () => {
   }
 
   return (
-    <div className="w-full rounded-xl  p-4 md:p-6 flex flex-col gap-3 items-center border border-gray-100">
+    <div className="w-full flex flex-col gap-3 items-center">
+      <h3 className="text-lg font-bold mb-2 text-left w-full text-gray-800">
+        Testar sua instancia enviando uma mensagem simples
+      </h3>
+
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(handleTestSendMessage)}

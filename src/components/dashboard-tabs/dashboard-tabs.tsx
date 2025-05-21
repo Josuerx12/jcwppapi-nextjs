@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 
 const DASHBOARD_TABS = [
   { label: "Instâncias", href: "/dashboard" },
-  { label: "Usuários pré-cadastrados", href: "/dashboard/pre-registered" },
+  { label: "Pré-cadastros", href: "/dashboard/pre-registered" },
   { label: "Usuários", href: "/dashboard/users" },
 ];
 
