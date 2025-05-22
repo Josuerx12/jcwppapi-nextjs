@@ -2,7 +2,7 @@ import React from "react";
 
 const CreateGroupDocs = () => {
   return (
-    <div className="w-full mx-auto text-left">
+    <div className="w-full text-wrap mx-auto text-left">
       <h3 className="text-lg font-bold mb-2 text-gray-800">
         Como usar a API para criar um grupo
       </h3>
@@ -22,14 +22,14 @@ const CreateGroupDocs = () => {
         </li>
         <li>
           <strong>Body (JSON):</strong>
-          <pre className="bg-gray-100 rounded px-2 py-2 mt-1 font-mono text-sm overflow-x-auto">{`{
+          <pre className="bg-gray-100 rounded break-all text-wrap px-2 py-2 mt-1 font-mono text-sm overflow-x-auto">{`{
   "numbers": ["5511999999999", "5511999999998"],
   "subject": "Grupo de teste"
 }`}</pre>
         </li>
         <li>
           <strong>Exemplo de requisição curl:</strong>
-          <pre className="bg-gray-100 text-wrap rounded px-2 py-2 mt-1 font-mono text-xs overflow-x-auto">
+          <pre className="bg-gray-100 break-all text-wrap rounded px-2 py-2 mt-1 font-mono text-xs overflow-x-auto">
             {`curl -X POST 
 https://jcwppapi.jcdev.com.br/instance/SEU_INSTANCE_ID/create-group 
 -H "Content-Type: application/json" 
@@ -42,7 +42,7 @@ https://jcwppapi.jcdev.com.br/instance/SEU_INSTANCE_ID/create-group
           </pre>
         </li>
       </ol>
-      <p className="text-gray-500 text-xs mt-2">
+      <p className="text-gray-500  text-xs mt-2">
         Substitua <span className="font-mono">SEU_INSTANCE_ID</span> e{" "}
         <span className="font-mono">SEU_TOKEN_SECRETO</span> pelos valores da
         sua instância e token.

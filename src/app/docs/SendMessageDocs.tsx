@@ -29,7 +29,7 @@ const SendMessageDocs = () => {
         </li>
         <li>
           <strong>Exemplo de requisição curl:</strong>
-          <pre className="bg-gray-100 text-wrap rounded px-2 py-2 mt-1 font-mono text-xs overflow-x-auto">
+          <pre className="bg-gray-100 break-all text-wrap rounded px-2 py-2 mt-1 font-mono text-xs overflow-x-auto">
             {`curl -X POST 
 https://jcwppapi.jcdev.com.br/instance/SEU_INSTANCE_ID/send-message 
 -H "Content-Type: application/json" 
