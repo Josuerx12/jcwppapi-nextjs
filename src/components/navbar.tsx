@@ -15,11 +15,11 @@ const Navbar = () => {
         <Logo />
       </div>
 
-      <nav className="flex gap-4">
+      <nav className="flex gap-2 md:gap-4">
         {user ? (
           <button
             onClick={logout}
-            className="flex items-center cursor-pointer gap-2 duration-100 md:hover:bg-gray-300 p-2"
+            className="flex items-center cursor-pointer gap-2 duration-100 md:hover:bg-gray-300 md:rounded px-2 py-1"
             type="button"
           >
             Sair <LogOut size={16} />
@@ -28,19 +28,19 @@ const Navbar = () => {
           <>
             {" "}
             <Link
-              className="md:flex hidden items-center gap-2 duration-100 md:hover:bg-gray-300 p-2"
+              className="md:flex hidden items-center gap-2 duration-100 md:hover:bg-gray-300 md:rounded px-2 py-1"
               href={"/"}
             >
               <Home size={16} /> Pagina Inicial
             </Link>
             <Link
-              className="flex items-center gap-2 duration-100 md:hover:bg-gray-300 sm:p-2"
+              className="flex items-center gap-2 duration-100 md:hover:bg-gray-300 md:rounded sxm: py-1 px-2"
               href={"/docs"}
             >
               <BookText size={16} /> Docs
             </Link>
             <Link
-              className="flex items-center gap-2 duration-100 md:hover:bg-gray-300 sm:p-2"
+              className="flex items-center gap-2 duration-100 md:hover:bg-gray-300 md:rounded sxm: py-1 px-2"
               href={"/login"}
             >
               Entrar <LogIn size={16} />
