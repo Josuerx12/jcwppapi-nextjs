@@ -7,6 +7,7 @@ import ToasterProvider from "@/providers/toaster-provider";
 import SidebarMenu from "@/components/sidebar-menu/sidebar-menu";
 import { Suspense } from "react";
 import AuthProvider from "@/providers/AuthProvider";
+import SupportWppButton from "@/components/buttons/SupportWppButton";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -44,6 +45,7 @@ export default function RootLayout({
                     {children}
                   </Suspense>
                 </div>
+                <SupportWppButton />
               </main>
             </AuthProvider>
           </ToasterProvider>
