@@ -17,11 +17,17 @@ const PreRegisterCard = ({ preRegister }: { preRegister: PreRegister }) => {
     onSuccess: () => {
       toast.success("Usuário aprovado com sucesso!");
       queryClient.invalidateQueries({ queryKey: ["pre-registers"] });
+      queryClient.invalidateQueries({ queryKey: ["list-users"] });
     },
     onError: () => {
       toast.error("Erro ao aprovar pré-cadastro.");
     },
   });
+
+  async function handleApproveUser() {
+    if (!confirm("Você tem certeza que deseja aprovar este usuário?")) return;
+    await approveUser(preRegister.preRegisterId);
+  }
 
   return (
     <Card className="transition-shadow shadow-sm hover:shadow-lg">
@@ -31,7 +37,7 @@ const PreRegisterCard = ({ preRegister }: { preRegister: PreRegister }) => {
         </div>
         <Button
           className="cursor-pointer"
-          onClick={() => approveUser(preRegister.preRegisterId)}
+          onClick={() => handleApproveUser()}
           disabled={isApproving}
         >
           {isApproving ? (

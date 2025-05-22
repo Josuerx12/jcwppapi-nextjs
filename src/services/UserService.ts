@@ -137,4 +137,18 @@ export class UserService {
       throw error;
     }
   }
+
+  static async deleteUser(id: string): Promise<void> {
+    try {
+      return await api.delete(`/users/` + id);
+    } catch (error: any) {
+      if (error.response) {
+        console.log(error.response);
+        throw error.response.data.message;
+      }
+
+      console.log(error);
+      throw error;
+    }
+  }
 }

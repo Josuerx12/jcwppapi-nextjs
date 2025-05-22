@@ -18,6 +18,7 @@ import {
   User2,
   Globe,
   Clock,
+  RefreshCcw,
 } from "lucide-react";
 import { toast } from "react-toastify";
 import InstanceSkeleton from "../loading/InstanceSkeleton";
@@ -25,7 +26,7 @@ import InstanceSkeleton from "../loading/InstanceSkeleton";
 const InstanceCard = ({ instance }: { instance: Instance }) => {
   const queryClient = useQueryClient();
 
-  const { data, isPending } = useQuery({
+  const { data, isPending, refetch, isRefetching } = useQuery({
     queryKey: ["instance" + instance.instanceId],
     queryFn: () =>
       InstanceService.connectOrCreate({
@@ -53,6 +54,11 @@ const InstanceCard = ({ instance }: { instance: Instance }) => {
 
   const isConnected = !data?.qrCode;
 
+  async function handleDeleteInstance() {
+    if (!confirm("Você tem certeza que deseja deletar esta instância?")) return;
+    await deleteInstance();
+  }
+
   return (
     <Card className="transition-shadow shadow-md hover:shadow-xl">
       <CardHeader className="flex flex-row items-start justify-between">
@@ -76,18 +82,37 @@ const InstanceCard = ({ instance }: { instance: Instance }) => {
             )}
           </CardDescription>
         </div>
-        <Button
-          size="icon"
-          variant="ghost"
-          onClick={() => deleteInstance()}
-          disabled={isDeleting}
-        >
-          {isDeleting ? (
-            <Loader2 className="animate-spin" size={16} />
-          ) : (
-            <Trash className="text-red-500" size={16} />
-          )}
-        </Button>
+        <div>
+          <Button
+            size="icon"
+            variant="ghost"
+            title={
+              "Atualizar ou gerar novo QR Code para conexão da instância ID: " +
+              instance.instanceId
+            }
+            onClick={() => refetch()}
+            disabled={isPending || isRefetching}
+          >
+            {isPending || isRefetching ? (
+              <Loader2 className="animate-spin" size={16} />
+            ) : (
+              <RefreshCcw className="text-gray-700" size={16} />
+            )}
+          </Button>
+          <Button
+            size="icon"
+            title={"Deletar instância ID: " + instance.instanceId}
+            variant="ghost"
+            onClick={() => handleDeleteInstance()}
+            disabled={isDeleting}
+          >
+            {isDeleting ? (
+              <Loader2 className="animate-spin" size={16} />
+            ) : (
+              <Trash className="text-red-500" size={16} />
+            )}
+          </Button>
+        </div>
       </CardHeader>
 
       <CardContent>

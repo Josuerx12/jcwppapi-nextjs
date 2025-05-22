@@ -1,11 +1,29 @@
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { Button } from "../ui/button";
 import { User } from "@/types/user.type";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Loader2, Trash } from "lucide-react";
+import { UserService } from "@/services/UserService";
+import { toast } from "react-toastify";
 
 const UserDashboardCard = ({ user }: { user: User }) => {
+  const query = useQueryClient();
   const { isPending } = useMutation({ mutationKey: ["delete-user"] });
+
+  const { mutateAsync, isPending: isDeleting } = useMutation({
+    mutationKey: ["delete-user"],
+    mutationFn: UserService.deleteUser,
+    onError: (e: any) => toast.error(e),
+    onSuccess: () => {
+      toast.success("Usuário deletado com sucesso!");
+      query.invalidateQueries({ queryKey: ["list-users"] });
+    },
+  });
+
+  async function deleteInstance() {
+    if (!confirm("Você tem certeza que deseja deletar este usuário?")) return;
+    await mutateAsync(user.userId);
+  }
 
   return (
     <Card className="transition-shadow shadow-sm hover:shadow-lg">
@@ -18,8 +36,8 @@ const UserDashboardCard = ({ user }: { user: User }) => {
         <Button
           size="icon"
           variant="ghost"
-          // onClick={() => deleteInstance()}
-          // disabled={isDeleting}
+          onClick={() => deleteInstance()}
+          disabled={isDeleting}
         >
           {isPending ? (
             <Loader2 className="animate-spin" size={16} />
