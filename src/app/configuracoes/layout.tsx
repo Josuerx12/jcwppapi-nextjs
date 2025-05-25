@@ -1,7 +1,7 @@
-import DashboardTabs from "@/components/dashboard-tabs/dashboard-tabs";
 import AuthProvider from "@/providers/AuthProvider";
+import ConfigsTabs from "./tabs/ConfigTabs";
 
-export default function DashboardLayout({
+export default function ConfigLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -10,7 +10,10 @@ export default function DashboardLayout({
     <AuthProvider>
       <div className="min-h-screen bg-gray-100 p-4">
         <div className="mx-auto bg-white rounded-lg shadow p-4">
-          <DashboardTabs />
+          <h1 className="text-3xl font-bold mb-6 text-green-600">
+            Configurações da Conta
+          </h1>
+          <ConfigsTabs />
 
           <div className="mt-4">{children}</div>
         </div>

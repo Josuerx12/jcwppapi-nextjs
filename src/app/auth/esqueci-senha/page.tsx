@@ -22,6 +22,7 @@ import { toast } from "react-toastify";
 import { useMutation } from "@tanstack/react-query";
 import { UserService } from "@/services/UserService";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const ForgetPasswordPage = () => {
   const form = useForm<ForgotPasswordFormType>({
@@ -90,12 +91,12 @@ const ForgetPasswordPage = () => {
             </Button>
             <p className="text-xs text-gray-400 text-center mt-2">
               Lembrou sua senha?{" "}
-              <a
-                href="/login"
+              <Link
+                href="/auth/login"
                 className="text-green-500 underline cursor-pointer"
               >
                 Fazer login
-              </a>
+              </Link>
             </p>
           </form>
         </Form>

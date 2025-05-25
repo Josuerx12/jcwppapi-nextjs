@@ -1,4 +1,4 @@
-import { loginFormType } from "@/app/login/schemas/login.schema";
+import { loginFormType } from "@/app/auth/login/schemas/login.schema";
 import { api } from "@/lib/api.config";
 import { User } from "@/types/user.type";
 import { create } from "zustand";

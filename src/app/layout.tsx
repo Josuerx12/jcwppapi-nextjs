@@ -6,7 +6,6 @@ import ReactQueryProvider from "@/providers/react-query-provider";
 import ToasterProvider from "@/providers/toaster-provider";
 import SidebarMenu from "@/components/sidebar-menu/sidebar-menu";
 import { Suspense } from "react";
-import AuthProvider from "@/providers/AuthProvider";
 import SupportWppButton from "@/components/buttons/SupportWppButton";
 
 const geistSans = Geist({
@@ -36,18 +35,16 @@ export default function RootLayout({
       >
         <ReactQueryProvider>
           <ToasterProvider>
-            <AuthProvider>
-              <Navbar />
-              <main className="flex">
-                <SidebarMenu />
-                <div className="flex-1 min-h-screen">
-                  <Suspense fallback={<div>Carregando...</div>}>
-                    {children}
-                  </Suspense>
-                </div>
-                <SupportWppButton />
-              </main>
-            </AuthProvider>
+            <Navbar />
+            <main className="flex">
+              <SidebarMenu />
+              <div className="flex-1 min-h-screen">
+                <Suspense fallback={<div>Carregando...</div>}>
+                  {children}
+                </Suspense>
+              </div>
+              <SupportWppButton />
+            </main>
           </ToasterProvider>
         </ReactQueryProvider>
       </body>

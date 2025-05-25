@@ -31,7 +31,7 @@ const LoginPage = () => {
     if (user) {
       router.push("/dashboard");
     }
-  }, [user]);
+  }, [user, router]);
 
   const form = useForm<loginFormType>({
     resolver: zodResolver(loginSchema),
@@ -139,7 +139,7 @@ const LoginPage = () => {
             <p className="text-xs text-gray-400 text-center mt-2">
               Esqueceu sua senha?{" "}
               <Link
-                href={"/esqueci-senha"}
+                href={"/auth/esqueci-senha"}
                 className="text-green-500 underline cursor-pointer"
               >
                 Recuperar

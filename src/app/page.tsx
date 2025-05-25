@@ -21,7 +21,7 @@ export default function Home() {
         </div>
         <div className="mt-12 md:mt-0 md:ml-12">
           <Image
-            src="/images/jcwppapi.png"
+            src="/images/jcwppapi.webp"
             alt="Conexão WhatsApp"
             width={500}
             height={400}

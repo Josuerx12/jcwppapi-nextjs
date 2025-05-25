@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import Logo from "./logo";
 import Link from "next/link";
 import { BookText, Home, LogIn, LogOut } from "lucide-react";
@@ -7,7 +7,12 @@ import { useAuthStore } from "@/store/auth.store";
 import SidebarBtnToggle from "./sidebar-menu/sidebar-btn-toggle";
 
 const Navbar = () => {
-  const { user, logout } = useAuthStore();
+  const { user, logout, initAuth } = useAuthStore();
+
+  useEffect(() => {
+    initAuth();
+  }, [initAuth]);
+
   return (
     <div className="w-full p-4 border-b-2 shadow flex justify-between items-center bg-white">
       <div className="flex items-center gap-4">
@@ -41,7 +46,7 @@ const Navbar = () => {
             </Link>
             <Link
               className="flex items-center gap-2 duration-100 md:hover:bg-gray-300 md:rounded sxm: py-1 px-2"
-              href={"/login"}
+              href={"/auth/login"}
             >
               Entrar <LogIn size={16} />
             </Link>

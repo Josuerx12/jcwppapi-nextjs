@@ -44,7 +44,7 @@ const ResetarSenhaPage = () => {
       toast.success(
         "Senha redefinida com sucesso! Faça login com sua nova senha."
       );
-      router.push("/login");
+      router.push("/auth/login");
       form.reset();
     },
   });
@@ -69,6 +69,7 @@ const ResetarSenhaPage = () => {
             className="flex flex-col gap-4"
           >
             <FormField
+              disabled={!!codeFromQuery}
               control={form.control}
               name="code"
               render={({ field }) => (
@@ -133,7 +134,7 @@ const ResetarSenhaPage = () => {
             <p className="text-xs text-gray-400 text-center mt-2">
               Lembrou sua senha?{" "}
               <a
-                href="/login"
+                href="/auth/login"
                 className="text-green-500 underline cursor-pointer"
               >
                 Fazer login

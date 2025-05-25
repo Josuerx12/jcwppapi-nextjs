@@ -1,6 +1,6 @@
 "use server";
 
-import { SignUpType } from "@/app/signup/schemas/signup.schema";
+import { SignUpType } from "@/app/auth/signup/schemas/signup.schema";
 import { api } from "@/lib/api.config";
 
 export async function SignUp(data: SignUpType) {

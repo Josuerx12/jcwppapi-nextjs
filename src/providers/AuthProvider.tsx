@@ -12,7 +12,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   if (isPending) {
     return (
-      <div className="flex flex-col items-center justify-center gap-y-6 h-screen">
+      <div className="flex flex-col items-center mt-10 gap-y-6 h-screen">
         <Logo />
 
         <h3 className="text-2xl text-center font-bold uppercase">

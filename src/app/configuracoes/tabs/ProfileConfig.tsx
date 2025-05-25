@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { TabsContent } from "@/components/ui/tabs";
 import { User } from "@/types/user.type";
 import { Pen, PenOff, Save, KeyRound } from "lucide-react";
 import React, { useState } from "react";
@@ -20,7 +19,7 @@ const profileSchema = z.object({
 
 type ProfileFormType = z.infer<typeof profileSchema>;
 
-const ProfileTab = ({ user }: { user: User }) => {
+const ProfileConfig = ({ user }: { user: User }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [openChangePassword, setOpenChangePassword] = useState(false);
 
@@ -48,8 +47,8 @@ const ProfileTab = ({ user }: { user: User }) => {
   }
 
   return (
-    <TabsContent value="profile">
-      <div className="mt-6 flex flex-col gap-6 max-w-2xl mx-auto bg-white rounded-xl shadow-lg p-8">
+    <>
+      <div className="mt-6 flex flex-col gap-6  mx-auto bg-white rounded-xl shadow-lg p-8">
         <div className="flex w-full gap-y-2 flex-wrap justify-between items-center mb-2">
           <h2 className="text-xl font-bold text-gray-800">Meus Dados</h2>
           <div className="flex gap-2">
@@ -146,8 +145,8 @@ const ProfileTab = ({ user }: { user: User }) => {
         open={openChangePassword}
         handleClose={() => setOpenChangePassword(false)}
       />
-    </TabsContent>
+    </>
   );
 };
 
-export default ProfileTab;
+export default ProfileConfig;
