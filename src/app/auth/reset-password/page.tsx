@@ -69,7 +69,6 @@ const ResetarSenhaPage = () => {
             className="flex flex-col gap-4"
           >
             <FormField
-              disabled={!!codeFromQuery}
               control={form.control}
               name="code"
               render={({ field }) => (
@@ -77,9 +76,10 @@ const ResetarSenhaPage = () => {
                   <FormLabel>Código de recuperação</FormLabel>
                   <FormControl>
                     <Input
+                      disabled={!!codeFromQuery}
                       placeholder="Digite o código recebido"
                       {...field}
-                      value={field.value ?? codeFromQuery}
+                      value={field.value || codeFromQuery}
                       className="mt-1"
                     />
                   </FormControl>
