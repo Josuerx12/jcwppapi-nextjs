@@ -9,7 +9,7 @@ const StartNowBtn = () => {
 
   return (
     <Link
-      href={user ? "/dashboard" : "/signup"}
+      href={user ? "/dashboard" : "/auth/signup"}
       className="inline-block bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition-all"
     >
       {user ? "Ir para dashboard" : "Comece Agora"}
