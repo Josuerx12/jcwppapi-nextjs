@@ -22,16 +22,14 @@ const UserDashboardCard = ({ user }: { user: User }) => {
 
   async function deleteInstance() {
     if (!confirm("Você tem certeza que deseja deletar este usuário?")) return;
-    await mutateAsync(user.userId);
+    await mutateAsync(user.id);
   }
 
   return (
     <Card className="transition-shadow shadow-sm hover:shadow-lg">
       <CardHeader className="flex flex-row items-start justify-between">
         <div>
-          <CardTitle className="text-base">
-            Id do usuário: {user.userId}
-          </CardTitle>
+          <CardTitle className="text-base">Id do usuário: {user.id}</CardTitle>
         </div>
         <Button
           size="icon"

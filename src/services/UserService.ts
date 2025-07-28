@@ -1,11 +1,12 @@
 import { api } from "@/lib/api.config";
+import { Pagination } from "@/types/pagination.type";
 import { User, UserSecret } from "@/types/user.type";
 
 export class UserService {
-  static async getAll(): Promise<User[]> {
+  static async getAll(): Promise<Pagination<User>> {
     try {
       const res = await api.get("/users/");
-      return res.data.payload;
+      return res.data;
     } catch (error: any) {
       if (error.response) {
         console.log(error.response);
@@ -77,18 +78,18 @@ export class UserService {
   }
 
   static async updateUser({
-    userId,
+    id,
     name,
     email,
     document,
   }: {
-    userId: string;
+    id: string;
     name: string;
     email: string;
     document: string;
   }) {
     try {
-      const res = await api.put(`/users/${userId}`, {
+      const res = await api.put(`/users/${id}`, {
         name,
         email,
         document,

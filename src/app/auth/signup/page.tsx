@@ -20,6 +20,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Eye, EyeOff } from "lucide-react";
 
 const SignUpPage = () => {
   const router = useRouter();
@@ -49,6 +50,8 @@ const SignUpPage = () => {
   async function handleSubmit(data: SignUpType) {
     await mutateAsync(data);
   }
+
+  const [showPassword, setShowPassword] = React.useState(false);
 
   return (
     <main className="min-h-screen flex justify-center bg-gray-100 px-4">
@@ -125,6 +128,29 @@ const SignUpPage = () => {
 
             <FormField
               control={form.control}
+              name="documentType"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Tipo de Documento</FormLabel>
+                  <FormControl>
+                    <select
+                      {...field}
+                      className="mt-1 border-input flex h-9 w-full rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] outline-none text-gray-800 dark:bg-input/30"
+                    >
+                      <option value="" disabled selected>
+                        Selecione o tipo
+                      </option>
+                      <option value="CPF">CPF</option>
+                      <option value="CNPJ">CNPJ</option>
+                    </select>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
               name="document"
               render={({ field }) => (
                 <FormItem>
@@ -135,6 +161,43 @@ const SignUpPage = () => {
                       {...field}
                       className="mt-1"
                     />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="password"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Senha</FormLabel>
+                  <FormControl>
+                    <div className="relative flex items-center">
+                      <Input
+                        placeholder="Insira sua senha."
+                        {...field}
+                        type={showPassword ? "text" : "password"}
+                        className="mt-1 pr-10"
+                      />
+                      <button
+                        type="button"
+                        tabIndex={-1}
+                        title="Mostrar/Esconder senha"
+                        className="absolute right-2 cursor-pointer top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-700"
+                        onClick={() => setShowPassword((v) => !v)}
+                        aria-label={
+                          showPassword ? "Esconder senha" : "Mostrar senha"
+                        }
+                      >
+                        {showPassword ? (
+                          <EyeOff className="w-4 h-4" />
+                        ) : (
+                          <Eye className="w-4 h-4" />
+                        )}
+                      </button>
+                    </div>
                   </FormControl>
                   <FormMessage />
                 </FormItem>

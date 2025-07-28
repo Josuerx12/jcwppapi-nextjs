@@ -35,8 +35,8 @@ const DashboardUsersPage = () => {
         <PreRegistersSkeleton />
       ) : (
         <div className="flex flex-col gap-6">
-          {data?.map((u) => (
-            <UserDashboardCard key={u.userId} user={u} />
+          {data?.data?.map((u) => (
+            <UserDashboardCard key={u.id} user={u} />
           ))}
         </div>
       )}

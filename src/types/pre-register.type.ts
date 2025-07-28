@@ -1,5 +1,5 @@
 export type PreRegister = {
-  preRegisterId: string;
+  id: string;
   name: string;
   document: string;
   phone: string;

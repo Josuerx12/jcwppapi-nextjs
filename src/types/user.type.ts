@@ -1,11 +1,11 @@
 export enum UserRoles {
-  USER = "user",
-  ADMIN = "admin",
-  SUPER = "super",
+  USER = "USER",
+  ADMIN = "ADMIN",
+  SUPER = "SUPER",
 }
 
 export type User = {
-  userId: string;
+  id: string;
   name: string;
   document: string;
   email: string;
@@ -16,7 +16,7 @@ export type User = {
 };
 
 export type UserSecret = {
-  userSecretId: string;
+  id: string;
   userId: string;
   secret: string;
   createdAt: Date;

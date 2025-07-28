@@ -17,9 +17,15 @@ export const SignUpSchema = z.object({
   phone: z
     .string({ message: "Número de telefone deve ser informado." })
     .regex(phoneRegex, "Telefone inválido. Ex: (99) 99999-9999 ou 99999999999"),
+  documentType: z.enum(["CPF", "CNPJ"], {
+    required_error: "Tipo de documento é obrigatório",
+  }),
   document: z
     .string({ message: "Número do documento deve ser informado." })
     .regex(documentRegex, "Documento inválido. Ex: CPF ou CNPJ."),
+  password: z
+    .string({ message: "Senha deve ser informada." })
+    .min(6, { message: "Senha deve conter pelo menos 6 caracteres." }),
 });
 
 export type SignUpType = z.infer<typeof SignUpSchema>;

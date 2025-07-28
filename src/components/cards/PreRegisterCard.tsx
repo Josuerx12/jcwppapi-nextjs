@@ -26,7 +26,7 @@ const PreRegisterCard = ({ preRegister }: { preRegister: PreRegister }) => {
 
   async function handleApproveUser() {
     if (!confirm("Você tem certeza que deseja aprovar este usuário?")) return;
-    await approveUser(preRegister.preRegisterId);
+    await approveUser(preRegister.id);
   }
 
   return (

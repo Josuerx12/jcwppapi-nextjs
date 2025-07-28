@@ -43,7 +43,7 @@ const ProfileConfig = ({ user }: { user: User }) => {
   });
 
   async function handleSubmit(data: ProfileFormType) {
-    await mutateAsync({ userId: user.userId, ...data });
+    await mutateAsync({ id: user.id, ...data });
   }
 
   return (

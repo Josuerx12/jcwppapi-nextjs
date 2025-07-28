@@ -37,7 +37,7 @@ const LoginPage = () => {
     resolver: zodResolver(loginSchema),
   });
 
-  const { isPending, mutateAsync } = useMutation({
+  const { isPending, mutateAsync, error } = useMutation({
     mutationKey: ["auth-user"],
     mutationFn: login,
     onError: (e: Error) => toast.error(e.message),
@@ -126,6 +126,12 @@ const LoginPage = () => {
                 </FormItem>
               )}
             />
+
+            {(error as any)?.response?.data?.message && (
+              <p className="bg-red-700 text-white p-2 rounded">
+                {(error as any)?.response?.data.message}
+              </p>
+            )}
 
             <Button
               disabled={isPending}

@@ -37,9 +37,10 @@ const DashboardPreRegisteredUsersPage = () => {
         <PreRegisterListSkeleton />
       ) : (
         <div className="flex flex-col gap-6">
-          {data?.map((pre) => (
-            <PreRegisterCard key={pre.preRegisterId} preRegister={pre} />
-          ))}
+          {data?.data.map((pre) => {
+            console.log(pre);
+            return <PreRegisterCard key={pre.id} preRegister={pre} />;
+          })}
         </div>
       )}
     </div>
