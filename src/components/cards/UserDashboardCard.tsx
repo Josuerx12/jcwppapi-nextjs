@@ -58,10 +58,6 @@ const UserDashboardCard = ({ user }: { user: User }) => {
           <strong>Documento: </strong>
           {user.document}
         </p>
-        <p className="text-sm text-muted-foreground">
-          <strong>Cargo: </strong>
-          {user.role}
-        </p>
       </CardContent>
     </Card>
   );
