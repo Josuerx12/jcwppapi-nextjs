@@ -31,7 +31,7 @@ const SendMessageTestForm = () => {
     mutationKey: ["send-message-docs"],
     mutationFn: async (data: SendMessageFormType) => {
       return await InstanceService.sendMessage(
-        data.instanceId,
+        data.sessionId,
         data.number,
         data.message,
         data.secret
@@ -61,7 +61,7 @@ const SendMessageTestForm = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
             <FormField
               control={form.control}
-              name="instanceId"
+              name="sessionId"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="text-xs md:text-sm">

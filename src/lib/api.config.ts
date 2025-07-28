@@ -1,5 +1,5 @@
 import axios from "axios";
 
 export const api = axios.create({
-  baseURL: "https://jcwppapi.jcdev.com.br/api",
+  baseURL: process.env.NEXT_PUBLIC_JCWPPAPI_URL,
 });

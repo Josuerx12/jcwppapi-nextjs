@@ -11,7 +11,7 @@ const ConfiguracoesPage = () => {
 
   useEffect(() => {
     if (!isPending && !user) {
-      router.push("/login");
+      router.push("/auth/login");
     }
   }, [user, isPending, router]);
 

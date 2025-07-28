@@ -30,8 +30,8 @@ const CreateInstanceModal = ({ handleOpen, isOpen }: Props) => {
     },
   });
 
-  // Inicia SSE listener quando `data?.instanceId` existe
-  useInstanceSSE(data?.instanceId || "", async () => {
+  // Inicia SSE listener quando `data?.sessionId` existe
+  useInstanceSSE(data?.sessionId || "", async () => {
     if (!isConnected) {
       setIsConnected(true);
       toast.success("Instância conectada com sucesso!");

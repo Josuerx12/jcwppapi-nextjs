@@ -1,6 +1,6 @@
 export interface Instance {
   message: string;
-  instanceId: string;
+  sessionId: string;
   qrCode?: string;
   profile?: Profile;
   bussinessProfile?: BussinessProfile;

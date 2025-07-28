@@ -27,19 +27,19 @@ const InstanceCard = ({ instance }: { instance: Instance }) => {
   const queryClient = useQueryClient();
 
   const { data, isPending, refetch, isRefetching } = useQuery({
-    queryKey: ["instance" + instance.instanceId],
+    queryKey: ["instance" + instance.sessionId],
     queryFn: () =>
       InstanceService.connectOrCreate({
-        instanceId: instance.instanceId,
+        sessionId: instance.sessionId,
       }),
   });
 
   const { mutateAsync: deleteInstance, isPending: isDeleting } = useMutation({
-    mutationFn: () => InstanceService.delete(instance.instanceId),
+    mutationFn: () => InstanceService.delete(instance.sessionId),
     onSuccess: () => {
       toast.success("Instância deletada com sucesso.");
       queryClient.invalidateQueries({
-        queryKey: ["instance" + instance.instanceId],
+        queryKey: ["instance" + instance.sessionId],
       });
       queryClient.invalidateQueries({ queryKey: ["instances"] });
     },
@@ -64,7 +64,7 @@ const InstanceCard = ({ instance }: { instance: Instance }) => {
       <CardHeader className="flex flex-row items-start justify-between">
         <div>
           <CardTitle className="text-base flex items-center gap-2">
-            Instância: <span className="font-mono">{instance.instanceId}</span>
+            Instância: <span className="font-mono">{instance.sessionId}</span>
           </CardTitle>
           <CardDescription className="flex items-center gap-2 mt-1 text-sm">
             {isConnected ? (
@@ -88,7 +88,7 @@ const InstanceCard = ({ instance }: { instance: Instance }) => {
             variant="ghost"
             title={
               "Atualizar ou gerar novo QR Code para conexão da instância ID: " +
-              instance.instanceId
+              instance.sessionId
             }
             onClick={() => refetch()}
             disabled={isPending || isRefetching}
@@ -101,7 +101,7 @@ const InstanceCard = ({ instance }: { instance: Instance }) => {
           </Button>
           <Button
             size="icon"
-            title={"Deletar instância ID: " + instance.instanceId}
+            title={"Deletar instância ID: " + instance.sessionId}
             variant="ghost"
             onClick={() => handleDeleteInstance()}
             disabled={isDeleting}

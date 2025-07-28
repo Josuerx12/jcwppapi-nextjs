@@ -46,14 +46,14 @@ export class InstanceService {
   }
 
   static async sendMessage(
-    instanceId: string,
+    sessionId: string,
     number: string,
     message: string,
     secret: string
   ) {
     try {
       const res = await api.post(
-        `/instance/${instanceId}/send-text`,
+        `/instance/${sessionId}/send-text`,
         {
           number,
           message,
@@ -78,7 +78,7 @@ export class InstanceService {
 }
 
 export type CreateOrConnectInstanceInput = {
-  instanceId?: string;
+  sessionId?: string;
 };
 
 export type CreateOrConnectInstanceOutput = Instance;

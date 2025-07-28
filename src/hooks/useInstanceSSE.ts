@@ -1,12 +1,12 @@
 // hooks/useInstanceSSE.ts
 import { useEffect } from "react";
 
-export function useInstanceSSE(instanceId: string, onConnected: () => void) {
+export function useInstanceSSE(sessionId: string, onConnected: () => void) {
   useEffect(() => {
-    if (!instanceId) return;
+    if (!sessionId) return;
 
     const eventSource = new EventSource(
-      `https://jcwppapi.jcdev.com.br/api/sse/instance/${instanceId}/status`
+      `${process.env.NEXT_PUBLIC_JCWPPAPI_URL}/sse/instance/${sessionId}/status`
     );
 
     eventSource.onmessage = (event) => {
@@ -18,5 +18,5 @@ export function useInstanceSSE(instanceId: string, onConnected: () => void) {
     return () => {
       eventSource.close();
     };
-  }, [instanceId, onConnected]);
+  }, [sessionId, onConnected]);
 }

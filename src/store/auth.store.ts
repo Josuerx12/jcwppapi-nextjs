@@ -27,6 +27,8 @@ export const useAuthStore = create<States & Actions>((set, get) => ({
       data: { access_token: string; user: User };
     }>("/auth/login", data);
 
+    console.log(response);
+
     if (response.data) {
       const { access_token, user } = response.data.data;
 

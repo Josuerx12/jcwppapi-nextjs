@@ -18,7 +18,7 @@ const DashboardPage = () => {
 
   useEffect(() => {
     if (!user && !isLoading) {
-      router.push("/login");
+      router.push("/auth/login");
     }
   }, [user, router, isLoading]);
 
@@ -50,9 +50,9 @@ const DashboardPage = () => {
       </div>
       <div className="mt-4 flex flex-col gap-y-4">
         {data?.instances && data.instances.length > 0 ? (
-          data.instances.map((i) => (
-            <InstanceCard instance={i} key={i.instanceId} />
-          ))
+          data.instances.map((i) => {
+            return <InstanceCard instance={i} key={i.sessionId} />;
+          })
         ) : (
           <p>Nenhuma instancia criada, crie uma para poder gerenciar.</p>
         )}

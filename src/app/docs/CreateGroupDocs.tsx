@@ -10,7 +10,7 @@ const CreateGroupDocs = () => {
         <li>
           <strong>Endpoint:</strong>
           <div className="bg-gray-100 rounded px-2 py-1 mt-1 font-mono text-sm break-all">
-            POST /instance/&lt;instanceId&gt;/create-group
+            POST /instance/&lt;sessionId&gt;/create-group
           </div>
         </li>
         <li>
